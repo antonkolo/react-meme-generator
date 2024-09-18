@@ -143,7 +143,7 @@ export default function App() {
             />
           </InputWrapper>
           <InputWrapper>
-            <Label htmlFor="text-top">Top Text</Label>
+            <Label htmlFor="text-top">Top text</Label>
             <Input
               id="text-top"
               onChange={(event) => {
@@ -156,7 +156,7 @@ export default function App() {
             />
           </InputWrapper>
           <InputWrapper>
-            <Label htmlFor="text-bottom">Bottom Text</Label>
+            <Label htmlFor="text-bottom">Bottom text</Label>
             <Input
               id="text-bottom"
               onChange={(event) => {
