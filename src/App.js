@@ -130,7 +130,7 @@ export default function App() {
       <Main>
         <Form>
           <InputWrapper>
-            <Label htmlFor="template">Template</Label>
+            <Label htmlFor="template">Meme template</Label>
             <Input
               id="template"
               onChange={(event) => {
