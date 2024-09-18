@@ -34,7 +34,7 @@ const Main = styled.main`
   width: 760px;
   min-width: 200px;
   max-width: 760px;
-  margin-top: 130px;
+  margin-top: 100px;
 `;
 
 const Form = styled.form`
@@ -77,7 +77,16 @@ const DownloadButton = styled.button`
     color: #fff;
     border-color: #fff;
   }
+
+  &:active {
+    color: #fff;
+    border-color: #fff;
+    box-shadow: inset 0px 0px 0px 5px #fff;
+    outline: none;
+  }
 `;
+
+const DownloadIcon = styled.i``;
 
 const Image = styled.img`
   width: 100%;
@@ -88,6 +97,19 @@ const Image = styled.img`
 `;
 
 // functions
+
+async function downloadImage(imageSrc) {
+  const image = await fetch(imageSrc);
+  const imageBlog = await image.blob();
+  const imageURL = URL.createObjectURL(imageBlog);
+
+  const link = document.createElement('a');
+  link.href = imageURL;
+  link.download = 'meme';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
 
 // track state of the whole link
 // link consists of all inputs
@@ -148,8 +170,16 @@ export default function App() {
               }}
             ></Input>
           </InputWrapper>
-          <DownloadButton onClick={(event) => event.preventDefault()}>
-            Download
+
+          <DownloadButton
+            onClick={(event) => {
+              event.preventDefault();
+              downloadImage(
+                `${imageLink.domain}/${imageLink.template}/${imageLink.topText}/${imageLink.bottomText}.${imageLink.format}`,
+              );
+            }}
+          >
+            <i class="fa fa-download"></i> Download
           </DownloadButton>
         </Form>
 
