@@ -86,8 +86,6 @@ const DownloadButton = styled.button`
   }
 `;
 
-const DownloadIcon = styled.i``;
-
 const Image = styled.img`
   width: 100%;
   max-height: 500px;
@@ -117,7 +115,7 @@ async function downloadImage(imageSrc) {
 // try to store the link as an object and update just the separate parts???
 
 export default function App() {
-  const [imageLink, changeImageLink] = useState({
+  const [imageLink, setImageLink] = useState({
     domain: 'https://api.memegen.link',
     template: 'buzz',
     topText: 'come_on',
@@ -137,12 +135,12 @@ export default function App() {
               id="template"
               onChange={(event) => {
                 const currentValue = event.currentTarget.value;
-                changeImageLink({
+                setImageLink({
                   ...imageLink,
                   template: currentValue,
                 });
               }}
-            ></Input>
+            />
           </InputWrapper>
           <InputWrapper>
             <Label htmlFor="text-top">Top Text</Label>
@@ -150,12 +148,12 @@ export default function App() {
               id="text-top"
               onChange={(event) => {
                 const currentValue = event.currentTarget.value;
-                changeImageLink({
+                setImageLink({
                   ...imageLink,
                   topText: currentValue,
                 });
               }}
-            ></Input>
+            />
           </InputWrapper>
           <InputWrapper>
             <Label htmlFor="text-bottom">Bottom Text</Label>
@@ -163,12 +161,12 @@ export default function App() {
               id="text-bottom"
               onChange={(event) => {
                 const currentValue = event.currentTarget.value;
-                changeImageLink({
+                setImageLink({
                   ...imageLink,
                   bottomText: currentValue,
                 });
               }}
-            ></Input>
+            />
           </InputWrapper>
 
           <DownloadButton
@@ -176,16 +174,17 @@ export default function App() {
               event.preventDefault();
               downloadImage(
                 `${imageLink.domain}/${imageLink.template}/${imageLink.topText}/${imageLink.bottomText}.${imageLink.format}`,
-              );
+              ).catch((error) => console.log(error));
             }}
           >
-            <i class="fa fa-download"></i> Download
+            <i className="fa fa-download" /> Download
           </DownloadButton>
         </Form>
 
         <Image
           src={`${imageLink.domain}/${imageLink.template}/${imageLink.topText}/${imageLink.bottomText}.${imageLink.format}`}
-        ></Image>
+          data-test-id="meme-image"
+        />
       </Main>
     </>
   );
