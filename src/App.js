@@ -50,7 +50,9 @@ const InputWrapper = styled.div`
   align-items: start;
 `;
 
-const Label = styled.label``;
+const Label = styled.label`
+  font-size: 16px;
+`;
 
 const Input = styled.input`
   box-sizing: border-box;
@@ -133,12 +135,15 @@ export default function App() {
             <Label htmlFor="template">Meme template</Label>
             <Input
               id="template"
-              onChange={(event) => {
-                const currentValue = event.currentTarget.value;
-                setImageLink({
-                  ...imageLink,
-                  template: currentValue,
-                });
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') {
+                  const currentValue = event.currentTarget.value;
+                  setImageLink({
+                    ...imageLink,
+                    template: currentValue,
+                  });
+                  event.preventDefault();
+                }
               }}
             />
           </InputWrapper>
@@ -146,12 +151,15 @@ export default function App() {
             <Label htmlFor="text-top">Top text</Label>
             <Input
               id="text-top"
-              onChange={(event) => {
-                const currentValue = event.currentTarget.value;
-                setImageLink({
-                  ...imageLink,
-                  topText: currentValue,
-                });
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') {
+                  const currentValue = event.currentTarget.value;
+                  setImageLink({
+                    ...imageLink,
+                    topText: currentValue,
+                  });
+                  event.preventDefault();
+                }
               }}
             />
           </InputWrapper>
@@ -159,12 +167,15 @@ export default function App() {
             <Label htmlFor="text-bottom">Bottom text</Label>
             <Input
               id="text-bottom"
-              onChange={(event) => {
-                const currentValue = event.currentTarget.value;
-                setImageLink({
-                  ...imageLink,
-                  bottomText: currentValue,
-                });
+              onKeyDown={(event) => {
+                if (event.key === 'Enter') {
+                  const currentValue = event.currentTarget.value;
+                  setImageLink({
+                    ...imageLink,
+                    bottomText: currentValue,
+                  });
+                  event.preventDefault();
+                }
               }}
             />
           </InputWrapper>
@@ -177,7 +188,7 @@ export default function App() {
               ).catch((error) => console.log(error));
             }}
           >
-            <i className="fa fa-download" /> Download
+            Download
           </DownloadButton>
         </Form>
 

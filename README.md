@@ -11,6 +11,29 @@ Create a web app with React that allows for users to generate and download memes
   - [ ] Button to Download
   - [ ] Image
 
+## Issues
+
+✅ After first page load: meme image element with attribute `data-test-id="meme-image"` found and visible
+✅ After first page load: image loading on page load for meme image element with attribute `data-test-id="meme-image"` and `src="https://api.memegen.link/buzz/come_on/type_something.webp"`
+✅ After first page load: top text label element containing text `Top text` found and visible
+✅ After first page load: bottom text label element containing text `Bottom text` found and visible
+✅ After first page load: top text input element found and visible
+✅ After first page load: bottom text input element found and visible
+✅ After first page load: template selector label element containing text `Meme template` found and visible
+✅ After entering top text: image `src` changed
+❗️ After entering top text: image `src` of `https://api.memegen.link/aag/such%20meme/type_something.webp` did not contain valid URL including `such meme`
+✅ After entering bottom text: image `src` changed
+❗️ After entering bottom text: image `src` of `https://api.memegen.link/aag/such%20meme/wow.webp` did not contain valid URL including `such meme` and `wow`
+✅ After typing `doge` and pressing enter: image `src` changed
+❗️ After selecting `doge` template: image `src` of `https://api.memegen.link/doge/such%20meme/wow.webp` did not contain valid URL including `such meme`, `wow` and `doge`
+❗️ After checking image `src`: button element with text `Download` not found or not visible
+
+### Solutions
+
+- Try replacing empty string with '%20':
+- Remove download icon from button: removed the icon, sadly `<i className="fa fa-download" />`
+- Changed on changed to onkeydown in order to get the image ONLY when enter is pressed
+
 It should allow the user to:
 
 - [ ] Enter text for the top and bottom of the meme
