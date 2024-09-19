@@ -137,7 +137,10 @@ export default function App() {
               id="template"
               onKeyDown={(event) => {
                 if (event.key === 'Enter') {
-                  const currentValue = event.currentTarget.value;
+                  const currentValue = event.currentTarget.value.replaceAll(
+                    ' ',
+                    '_',
+                  );
                   setImageLink({
                     ...imageLink,
                     template: currentValue,
@@ -153,7 +156,10 @@ export default function App() {
               id="text-top"
               onKeyDown={(event) => {
                 if (event.key === 'Enter') {
-                  const currentValue = event.currentTarget.value;
+                  const currentValue = event.currentTarget.value.replaceAll(
+                    ' ',
+                    '_',
+                  );
                   setImageLink({
                     ...imageLink,
                     topText: currentValue,
@@ -169,7 +175,10 @@ export default function App() {
               id="text-bottom"
               onKeyDown={(event) => {
                 if (event.key === 'Enter') {
-                  const currentValue = event.currentTarget.value;
+                  const currentValue = event.currentTarget.value.replaceAll(
+                    ' ',
+                    '_',
+                  );
                   setImageLink({
                     ...imageLink,
                     bottomText: currentValue,
