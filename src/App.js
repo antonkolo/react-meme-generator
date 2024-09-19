@@ -118,10 +118,10 @@ async function downloadImage(imageSrc) {
 
 export default function App() {
   const [imageLink, setImageLink] = useState({
-    domain: 'https://api.memegen.link',
+    domain: 'https://api.memegen.link/images',
     template: 'buzz',
-    topText: 'come_on',
-    bottomText: 'type_something',
+    topText: '',
+    bottomText: '',
     format: 'webp',
   });
 
@@ -202,7 +202,7 @@ export default function App() {
         </Form>
 
         <Image
-          src={`${imageLink.domain}/${imageLink.template}/${imageLink.topText}/${imageLink.bottomText}.${imageLink.format}`}
+          src={`${imageLink.domain}/${imageLink.template}/${imageLink.topText ? imageLink.topText + '/' : '_/'}${imageLink.bottomText ? imageLink.bottomText + '/' : ''}`}
           data-test-id="meme-image"
         />
       </Main>
