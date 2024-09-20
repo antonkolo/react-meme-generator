@@ -117,8 +117,6 @@ async function downloadImage(imageSrc) {
 // try to store the link as an object and update just the separate parts???
 
 export default function App() {
-  const [topText, setTopText] = useState('_');
-  const [bottomText, setBottomText] = useState('_');
   const [template, setTemplate] = useState('buzz');
 
   const [imageLink, setImageLink] = useState({
@@ -168,7 +166,6 @@ export default function App() {
                 const value = e.currentTarget.value;
                 console.log(value);
                 const newValue = value ? value : '_';
-                setTopText(newValue);
                 setImageLink({
                   ...imageLink,
                   topText: newValue,
@@ -183,7 +180,6 @@ export default function App() {
               onChange={(e) => {
                 const value = e.currentTarget.value;
                 const newValue = value ? value : '_';
-                setBottomText(newValue);
                 setImageLink({
                   ...imageLink,
                   bottomText: newValue,
