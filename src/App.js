@@ -117,11 +117,15 @@ async function downloadImage(imageSrc) {
 // try to store the link as an object and update just the separate parts???
 
 export default function App() {
+  const [topText, setTopText] = useState('_');
+  const [bottomText, setBottomText] = useState('_');
+  const [template, setTemplate] = useState('buzz');
+
   const [imageLink, setImageLink] = useState({
     domain: 'https://api.memegen.link/images',
     template: 'buzz',
-    topText: '',
-    bottomText: '',
+    topText: '_',
+    bottomText: '_',
     format: 'webp',
   });
 
@@ -130,23 +134,27 @@ export default function App() {
       <GlobalStyle />
       <Title>Meme Generator 🤡</Title>
       <Main>
-        <Form>
+        <Form
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              setImageLink({
+                ...imageLink,
+                topText: topText,
+                bottomText: bottomText,
+                template: template,
+              });
+            }
+          }}
+        >
           <InputWrapper>
             <Label htmlFor="template">Meme template</Label>
             <Input
               id="template"
-              onKeyDown={(event) => {
-                if (event.key === 'Enter') {
-                  const currentValue = event.currentTarget.value.replaceAll(
-                    ' ',
-                    '_',
-                  );
-                  setImageLink({
-                    ...imageLink,
-                    template: currentValue,
-                  });
-                  event.preventDefault();
-                }
+              onChange={(e) => {
+                const value = e.currentTarget.value;
+                const newValue = value ? value : 'buzz';
+                setTemplate(newValue);
               }}
             />
           </InputWrapper>
@@ -154,18 +162,10 @@ export default function App() {
             <Label htmlFor="text-top">Top text</Label>
             <Input
               id="text-top"
-              onKeyDown={(event) => {
-                if (event.key === 'Enter') {
-                  const currentValue = event.currentTarget.value.replaceAll(
-                    ' ',
-                    '_',
-                  );
-                  setImageLink({
-                    ...imageLink,
-                    topText: currentValue,
-                  });
-                  event.preventDefault();
-                }
+              onChange={(e) => {
+                const value = e.currentTarget.value;
+                const newValue = value ? value : '_';
+                setTopText(newValue);
               }}
             />
           </InputWrapper>
@@ -173,18 +173,10 @@ export default function App() {
             <Label htmlFor="text-bottom">Bottom text</Label>
             <Input
               id="text-bottom"
-              onKeyDown={(event) => {
-                if (event.key === 'Enter') {
-                  const currentValue = event.currentTarget.value.replaceAll(
-                    ' ',
-                    '_',
-                  );
-                  setImageLink({
-                    ...imageLink,
-                    bottomText: currentValue,
-                  });
-                  event.preventDefault();
-                }
+              onChange={(e) => {
+                const value = e.currentTarget.value;
+                const newValue = value ? value : '_';
+                setBottomText(newValue);
               }}
             />
           </InputWrapper>
@@ -202,7 +194,8 @@ export default function App() {
         </Form>
 
         <Image
-          src={`${imageLink.domain}/${imageLink.template}/${imageLink.topText ? imageLink.topText + '/' : '_/'}${imageLink.bottomText ? imageLink.bottomText + '/' : ''}`}
+          // src={`${imageLink.domain}/${imageLink.template}/${imageLink.topText ? imageLink.topText + '/' : '_/'}${imageLink.bottomText ? imageLink.bottomText + '/' : ''}`}
+          src={`${imageLink.domain}/${imageLink.template}/${imageLink.topText}/${imageLink.bottomText}.${imageLink.format}`}
           data-test-id="meme-image"
         />
       </Main>
