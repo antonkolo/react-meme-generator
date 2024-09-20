@@ -138,12 +138,6 @@ export default function App() {
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
               e.preventDefault();
-              setImageLink({
-                ...imageLink,
-                topText: topText,
-                bottomText: bottomText,
-                template: template,
-              });
             }
           }}
         >
@@ -156,6 +150,14 @@ export default function App() {
                 const newValue = value ? value : 'buzz';
                 setTemplate(newValue);
               }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  setImageLink({
+                    ...imageLink,
+                    template: template,
+                  });
+                }
+              }}
             />
           </InputWrapper>
           <InputWrapper>
@@ -164,8 +166,13 @@ export default function App() {
               id="text-top"
               onChange={(e) => {
                 const value = e.currentTarget.value;
+                console.log(value);
                 const newValue = value ? value : '_';
                 setTopText(newValue);
+                setImageLink({
+                  ...imageLink,
+                  topText: newValue,
+                });
               }}
             />
           </InputWrapper>
@@ -177,6 +184,10 @@ export default function App() {
                 const value = e.currentTarget.value;
                 const newValue = value ? value : '_';
                 setBottomText(newValue);
+                setImageLink({
+                  ...imageLink,
+                  bottomText: newValue,
+                });
               }}
             />
           </InputWrapper>
