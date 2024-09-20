@@ -4,25 +4,46 @@ import styled, { createGlobalStyle } from 'styled-components';
 // styled components
 
 const GlobalStyle = createGlobalStyle`
+  html {
+  font-size: 16px;
+  height: 100%;
+  }
+
   body {
+    width: 100%;
+    height: 100%;
     margin: 0;
     padding: 0;
     background: #040404;
     font-family: Roboto, sans-serif;
-    font-size: 18px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
     color: #E7E7E7;
   }
+
+  #root {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  form > *:not(:last-child) {
+    margin-right: 16px;
+  }
 `;
 
 const Title = styled.h1`
   font-family: Lacquer, sans-serif;
-  font-size: 40px;
+  font-size: 2.5rem;
   text-shadow: #ff9900 0px -4px 6px;
-  margin-top: 24px;
+  margin: 0;
+  position: absolute;
+  top: 16px;
   color: #ff9900;
   text-align: center;
 `;
@@ -31,14 +52,12 @@ const Main = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 760px;
-  min-width: 200px;
-  max-width: 760px;
-  margin-top: 100px;
+  width: 60%;
 `;
 
 const Form = styled.form`
   width: 100%;
+  min-width: 360px;
   display: flex;
   justify-content: space-between;
   align-items: end;
@@ -48,27 +67,40 @@ const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: start;
+  margin-top: 8px;
+  width: 30%;
 `;
 
 const Label = styled.label`
-  font-size: 16px;
+  font-size: 0.9rem;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const Input = styled.input`
   box-sizing: border-box;
-  font-size: 18px;
+  font-size: 1rem;
   height: 32px;
-  width: 160px;
+  width: 100%;
   padding: 4px 4px;
   margin-top: 10px;
+  border: 1px solid #ff9900;
   border-radius: 6px;
-  border: none;
-  background-color: #e5e5e5;
+
+  color: #e7e7e7;
+  background-color: #040404;
+  outline: none;
+
+  &:focus {
+    border-color: #fff;
+  }
 `;
 
 const DownloadButton = styled.button`
   padding: 13px 20px;
   border-radius: 6px;
+  margin-top: 16px;
   color: #ff9900;
   background-color: #040404;
   border: 1px solid #ff9900;
@@ -90,7 +122,8 @@ const DownloadButton = styled.button`
 
 const Image = styled.img`
   width: 100%;
-  max-height: 500px;
+  min-width: 360px;
+  height: auto;
   margin-top: 56px;
   border-radius: 8px;
   box-shadow: #ff9900 0 0 40px 10px;
@@ -187,24 +220,22 @@ export default function App() {
               }}
             />
           </InputWrapper>
-
-          <DownloadButton
-            onClick={(event) => {
-              event.preventDefault();
-              downloadImage(
-                `${imageLink.domain}/${imageLink.template}/${imageLink.topText}/${imageLink.bottomText}.${imageLink.format}`,
-              ).catch((error) => console.log(error));
-            }}
-          >
-            Download
-          </DownloadButton>
         </Form>
 
         <Image
-          // src={`${imageLink.domain}/${imageLink.template}/${imageLink.topText ? imageLink.topText + '/' : '_/'}${imageLink.bottomText ? imageLink.bottomText + '/' : ''}`}
           src={`${imageLink.domain}/${imageLink.template}/${imageLink.topText}/${imageLink.bottomText}.${imageLink.format}`}
           data-test-id="meme-image"
         />
+        <DownloadButton
+          onClick={(event) => {
+            event.preventDefault();
+            downloadImage(
+              `${imageLink.domain}/${imageLink.template}/${imageLink.topText}/${imageLink.bottomText}.${imageLink.format}`,
+            ).catch((error) => console.log(error));
+          }}
+        >
+          Download
+        </DownloadButton>
       </Main>
     </>
   );
