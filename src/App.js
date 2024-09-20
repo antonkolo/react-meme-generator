@@ -61,6 +61,9 @@ const Form = styled.form`
   display: flex;
   justify-content: space-between;
   align-items: end;
+  @media (min-width: 1300px) {
+    justify-content: flex-start;
+  }
 `;
 
 const InputWrapper = styled.div`
@@ -69,6 +72,7 @@ const InputWrapper = styled.div`
   align-items: start;
   margin-top: 8px;
   width: 30%;
+  max-width: 200px;
 `;
 
 const Label = styled.label`
@@ -98,9 +102,9 @@ const Input = styled.input`
 `;
 
 const DownloadButton = styled.button`
-  padding: 13px 20px;
+  padding: 16px 64px;
   border-radius: 6px;
-  margin-top: 16px;
+  margin-top: 32px;
   color: #ff9900;
   background-color: #040404;
   border: 1px solid #ff9900;
